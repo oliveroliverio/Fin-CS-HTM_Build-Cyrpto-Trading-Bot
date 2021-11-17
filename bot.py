@@ -1,6 +1,6 @@
 import websocket
 
-SOCKET = "wss://stream.binance.com:9443/ws/ethusdt@kline_1m>"
+SOCKET = "wss://stream.binance.com:9443/ws/ethusdt@kline_1m"
 
 def on_open(ws):
   print('openned connection')

@@ -123,4 +123,23 @@ def on_message(ws, message):
 
 ```
 
-stopped at 24:37
+Create closes array and append each new close here
+
+```python
+closes = []
+
+def on_message(ws, message):
+  global closes
+  json_message = json.loads(message)
+    candle = json_message['k']
+
+  is_candle_closed = candle['x']
+  close = candle['c']
+
+  if is_candle_closed:
+    print("candle closed at {}".format(close))
+    closes.append(float(close))
+    print("closes")
+    print(close)
+
+```

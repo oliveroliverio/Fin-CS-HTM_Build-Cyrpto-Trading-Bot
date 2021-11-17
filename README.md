@@ -72,3 +72,53 @@ output
 it's working...
 
 Bug fixed.  I had a `>` in SOCKET.
+
+Print actual message
+
+```python
+def on_message(ws, message):
+  print('message received')
+  print(message)
+```
+
+convert message to JSON
+
+```python
+import json
+
+def on_message(ws, message):
+  print('message received')
+  json_message = json.loads(message)
+  print(json_message)
+```
+
+Pretty print json message
+```python
+import json
+import pprint
+
+def on_message(ws, message):
+  print('message received')
+  json_message = json.loads(message)
+  pprint.pprint(json_message)
+```
+
+Note, looking at docs, 'k' is candle information.
+
+Parse candle information:
+
+```python
+def on_message(ws, message):
+  json_message = json.loads(message)
+  candle = json_message['k']
+
+  # parameter 'x' is boolean saying if candle is closed
+  is_candle_closed = candle['x']
+  # parameter 'c' is the value at closing
+  close = candle['c']
+
+  # print closing value if candle is closed
+  if is_candle_closed:
+    print("candle closed at {}".format(close))
+
+```

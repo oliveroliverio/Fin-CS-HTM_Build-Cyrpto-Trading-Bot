@@ -143,3 +143,44 @@ def on_message(ws, message):
     print(close)
 
 ```
+
+From 27:00 to 34 he goes over momentum indicators and TA
+
+![](2021-11-17-12-40-47.png)
+
+## Applying momentum indicators to app
+
+```python
+import numpy as np
+
+RSI_PERDIOD = 14
+RSI_OVERBOUGHT = 70
+RSI_OVERSOLD = 30
+TRADE_SYMBOL = 'ETHUSD'
+TRADE_QUANTITY = 0.05
+
+# ...
+# ...
+
+  if is_candle_closed:
+    print("candle closed at {}".format(close))
+    closes.append(float(close))
+    print("closes")
+    print(close)
+
+    if len(closes) > RSI_PERIOD:
+      # store close values in numpy array
+      # this way the array can be input to TA-lib
+      np_closes = np.array(closes)
+      rsi = talib.RSI(np_closes, RSI_PERIOD)
+      print("all RSIs calculated so far")
+      print(rsi)
+      last_rsi = rsi[-1]
+      print("the current RSI is {}".format(last_rsi))
+
+      if last_rsi > RSI_OVERBOUGHT:
+        print("SELL!")
+
+      if last_rsi < RSI_OVERSOLD:
+        print("BUY!")
+```

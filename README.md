@@ -122,3 +122,5 @@ def on_message(ws, message):
     print("candle closed at {}".format(close))
 
 ```
+
+stopped at 24:37

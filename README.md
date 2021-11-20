@@ -189,3 +189,6 @@ TRADE_QUANTITY = 0.05
 ### Accounting for positions (open)
 CASE 2: you have a position open
 
+## Note, only modifying actual code now, will add to readme later
+
+stopped at 46:33

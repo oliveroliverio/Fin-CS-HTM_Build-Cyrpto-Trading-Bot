@@ -41,9 +41,13 @@ def on_message(ws, message):
 
       if last_rsi > RSI_OVERBOUGHT:
         print("go buy")
+        # code here for placing binance order
 
       if last_rsi < RSI_OVERSOLD:
-        print("go sell")
+        # can only take action here if you're in a position.  Otherwise, short maybe
+        # stopped at 46:33
+        if in_position:
+          print("Overbought! Sell!")
 
 
 ws = websocket.WebSocketApp(SOCKET, on_open=on_open, on_close=on_close, on_message=on_message)

@@ -3,10 +3,12 @@ import pprint
 
 SOCKET = "wss://stream.binance.com:9443/ws/ethusdt@kline_1m"
 
+# these will eventually be variable
 RSI_PERIOD = 14
 RSI_OVERBOUGHT = 70
 RSI_OVERSOLD = 30
-
+TRADE_SYMBOL = 'BTCUSD'
+TRADE_QUANTITY = 0.05
 closes = []
 
 def on_open(ws):
@@ -29,6 +31,19 @@ def on_message(ws, message):
     print("closes")
     print(close)
 
+    if len(closes) > RSI_PERIOD:
+      np_closes = np.array(closes)
+      rsi = talib.RSI(np_closes, RSI_PERIOD)
+      print("all RSIs calc'd so far")
+      print(rsi)
+      last_rsi = rsi[-1]
+      print("the current rsi is {}".format(last_rsi))
+
+      if last_rsi > RSI_OVERBOUGHT:
+        print("go buy")
+
+      if last_rsi < RSI_OVERSOLD:
+        print("go sell")
 
 
 ws = websocket.WebSocketApp(SOCKET, on_open=on_open, on_close=on_close, on_message=on_message)

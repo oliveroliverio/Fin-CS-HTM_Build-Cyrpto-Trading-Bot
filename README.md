@@ -150,6 +150,7 @@ From 27:00 to 34 he goes over momentum indicators and TA
 
 ## Applying momentum indicators to app
 
+### CASE 1: no positions open
 ```python
 import numpy as np
 
@@ -184,3 +185,7 @@ TRADE_QUANTITY = 0.05
       if last_rsi < RSI_OVERSOLD:
         print("BUY!")
 ```
+
+### Accounting for positions (open)
+CASE 2: you have a position open
+
